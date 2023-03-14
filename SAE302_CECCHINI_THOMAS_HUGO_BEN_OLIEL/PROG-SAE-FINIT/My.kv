@@ -1,0 +1,636 @@
+#Gère les fenetres
+WindowManager:
+    Authentification:
+    Connexion:
+    FirstWindow:
+    SecondWindow:
+    FourWindow:
+    Interroger_la_bd:
+
+#Relié à la class Interroger_la_bd dans le python
+<Interroger_la_bd>:
+    
+    #on définit tout les id qu'on va utilisé ainsi que le nom de la fenetre pour ensuite pouvoir naviguer entre les pages
+    name: "interroger"
+    idetu:idetu
+    nom:nom
+    prenom:prenom
+    statut:statut
+    annee:annee
+    image:image
+
+    #Permet de mettre le fond en gris
+    canvas.before:
+        Color:
+            rgba:(0.7,0.7,0.7,0.7)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    #On fait le kv en relative c'est a dire qu'on place ou on veut les éléments
+    RelativeLayout:
+        orientation: "vertical"
+        pos : self.pos
+        size: root.size
+
+        #Les champs images permette de stokcer une image et de l'afficher
+        Image:
+            id:image
+            source: ''
+            size_hint: 0.4, 0.4
+            pos_hint: {'center_x': 0.5, 'center_y': 0.85}
+
+        #Les champs label sont des zones dans la qu'elle tu texte peut apparaitre
+        Label:
+            text:'ID'
+            font_size:"20"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.30, "center_y":.70}
+
+        Label:
+            id:idetu
+            text:''
+            font_size:"30"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.70, "center_y":.70}
+
+        Label:
+            text:'Nom'
+            font_size:"20"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.30, "center_y":.60}
+
+        Label:
+            id:nom
+            text:''
+            font_size:"30"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.70, "center_y":.60}
+
+        
+        Label:
+            text:'Prénom'
+            font_size:"20"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.30, "center_y":.50}
+
+        Label:
+            id:prenom
+            text:''
+            font_size:"30"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.70, "center_y":.50}
+        
+        Label:
+            text:'Année'
+            font_size:"20"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.30, "center_y":.40}
+
+        Label:
+            id:annee
+            text:''
+            font_size:"30"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.70, "center_y":.40}
+
+        Label:
+            text:'Statut'
+            font_size:"20"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.30, "center_y":.30}
+
+        Label:
+            id:statut
+            text:''
+            font_size:"30"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.70, "center_y":.30}
+
+        
+        #Les champs Button permette de creer des bouttons sur les quelles on peut appuyer pour potentiellement changer de page ou executer une méthod
+        #on_press: pour executer la method
+        Button:
+            text: "Afficher les infos"
+            font_size:"20"
+            size_hint:0.50, 0.05
+            pos_hint:{"center_x":.5, "center_y":.22}
+            on_press:root.intero()
+
+
+        #on_release: pour changer de page est aller à la page quatre ici
+        Button:
+            text: "Voir les notes"
+            font_size:"20"
+            size_hint:0.50, 0.05
+            pos_hint:{"center_x":.5, "center_y":.13}
+            on_release: 
+                app.root.current = "quatre"
+                root.manager.transition.direction = "left"
+
+        Button:
+            id:retour
+            text: "Retour"
+            font_size:"20"
+            size_hint:0.50, 0.05
+            pos_hint:{"center_x":.5, "center_y":.06}
+            on_release: 
+                app.root.current = "Connexion"
+                root.manager.transition.direction = "right"
+
+
+#Relié à la class FirstWIndow dans le python/kivy et qui a pour but d'inscrire les etudiants
+<FirstWindow>:
+    name: "first"
+    spinner:spinner
+    identifiant:identifiant
+    annee:annee
+    nom:nom
+    prenom:prenom
+    matiere1:matiere1
+    matiere2:matiere2
+    matiere3:matiere3
+    matiere4:matiere4
+    mdp:mdp 
+
+    canvas.before:
+        Color:
+            rgba:(0.7,0.7,0.7,0.7)
+        Rectangle:
+            pos: self.pos
+            size: self.size  
+
+    RelativeLayout:
+        oriental:"vertical"
+        pos : self.pos
+        size: root.size
+
+        #Le champs spinner permet de faire une liste déroulante avec ici comme options 1A 2A et Profs
+        Spinner:
+            id:spinner
+            text:'Choisit une options'
+            font_size:"20"
+            size_hint:0.80,0.05
+            values:('1A','2A','Profs')
+            size:(140, 400)
+            pos_hint:{'center_x': .5, 'center_y': .90}
+        
+        RelativeLayout:
+            oriental:"vertical"
+            pos : self.pos
+            size: root.size
+            Label:
+                text:"ID"
+                font_size:"20"
+                size_hint:1, 0.1
+                pos_hint:{"center_x":.25, "center_y":.75}
+            
+            #Le champs TextInput permet à l'utilisateur d'écrire dans un champs pour récupérer les infos plus tard
+            TextInput:
+                id:identifiant
+                multiline:False
+                font_size:"20"
+                size_hint:0.42, 0.05
+                pos_hint:{"center_x":.25, "center_y":.70}
+
+            Label:
+                text:"Année"
+                font_size:"20"
+                size_hint:1, 0.1
+                pos_hint:{"center_x":.75, "center_y":.75}
+            
+            TextInput:
+                id:annee
+                multiline:False
+                font_size:"20"
+                size_hint:0.42, 0.05
+                pos_hint:{"center_x":.75, "center_y":.70}
+
+            Label:
+                text:"Nom"
+                font_size:"20"
+                size_hint:1, 0.1
+                pos_hint:{"center_x":.25, "center_y":.65}
+            
+            TextInput:
+                id:nom
+                multiline:False
+                font_size:"20"
+                size_hint:0.42, 0.05
+                pos_hint:{"center_x":.25, "center_y":.60}
+
+            Label:
+                text:"Prénom"
+                font_size:"20"
+                size_hint:1, 0.1
+                pos_hint:{"center_x":.75, "center_y":.65}
+                
+            TextInput:
+                id:prenom
+                multiline:False
+                font_size:"20"
+                size_hint:0.42, 0.05
+                pos_hint:{"center_x":.75, "center_y":.60}
+                
+            Label:
+                text:"Anglais"
+                font_size:"20"
+                size_hint:1, 0.1
+                pos_hint:{"center_x":.25, "center_y":.55}
+
+            TextInput:
+                id:matiere1
+                multiline:False
+                font_size:"20"
+                size_hint:0.42, 0.05
+                pos_hint:{"center_x":.25, "center_y":.50}
+
+            Label:
+                text:"Mathématiques"
+                font_size:"20"
+                size_hint:1, 0.1
+                pos_hint:{"center_x":.75, "center_y":.55}
+
+            TextInput:
+                id:matiere2
+                multiline:False
+                font_size:"20"
+                size_hint:0.42, 0.05
+                pos_hint:{"center_x":.75, "center_y":.50}
+
+
+            Label:
+                text:"Informatique"
+                font_size:"20"
+                size_hint:1, 0.1
+                pos_hint:{"center_x":.25, "center_y":.45}
+
+            TextInput:
+                id:matiere3
+                multiline:False
+                font_size:"20"
+                size_hint:0.42, 0.05
+                pos_hint:{"center_x":.25, "center_y":.40}
+
+            Label:
+                text:"Réseaux"
+                font_size:"20"
+                size_hint:1, 0.1
+                pos_hint:{"center_x":.75, "center_y":.45}
+
+            TextInput:
+                id:matiere4
+                multiline:False
+                font_size:"20"
+                size_hint:0.42, 0.05
+                pos_hint:{"center_x":.75, "center_y":.40}
+                
+            Label:
+                text:"Mot de passe"
+                font_size:"20"
+                size_hint:1, 0.1
+                pos_hint:{"center_x":.5, "center_y":.35}
+            
+            TextInput:
+                id:mdp
+                multiline:False
+                font_size:"20"
+                size_hint:0.5, 0.05
+                pos_hint:{"center_x":.5, "center_y":.30}
+
+
+            Button:
+                text: "Choisir Image"
+                font_size:"20"
+                size_hint:0.50, 0.05
+                pos_hint:{"center_x":.5, "center_y":.20}
+                on_release: 
+                    app.root.current = "second"
+                    root.manager.transition.direction = "left"
+            
+            Button:
+                text:"Enregistrer"
+                font_size:"20"
+                size_hint:0.50, 0.05
+                pos_hint:{"center_x":.5, "center_y":.14}
+                on_press:root.press()
+
+            Button:
+                text: "Retour"
+                font_size:"20"
+                size_hint:0.50, 0.05
+                pos_hint:{"center_x":.5, "center_y":.08}
+                on_release: 
+                    app.root.current = "auth"
+                    root.manager.transition.direction = "right"
+
+#Relié à la class SecondWindow dans le python/kivy et qui sert à récupérer le chemin de la photo choisit et ensuite l'envoyé
+<SecondWindow>:
+    name: "second"
+    id:my_widget
+    my_image:my_image
+    # identifiant: identifiant
+    
+    
+
+    BoxLayout:
+
+        orientation: "vertical"
+        size: root.width, root.height
+
+        padding: 50
+        spacing: 20
+
+        Image:
+            id: my_image
+            source: ""
+    
+
+        #Permet de récupérer le chemin 
+        FileChooserIconView: 
+            id: filechooser
+            on_selection: my_widget.selected(filechooser.selection)
+
+        Button:
+            text:"Envoyer"
+            font_size:"20"
+            size_hint:0.50, 0.05
+            pos_hint:{"center_x":.5, "center_y":.18}
+            on_press:root.selected(filechooser.selection)
+
+
+        Button:
+            text: "Retour"
+            font_size:"20"
+            size_hint:0.50, 0.05
+            pos_hint:{"center_x":.5, "center_y":.12}
+            on_release: 
+                app.root.current = "first"
+                root.manager.transition.direction = "right"
+
+#Relié à la class FourWindow dans le python/kivy et qui permet de récupérer les valeurs de la moyenne enregistré dans la bd pour les afficher
+<FourWindow>:
+    name: "quatre"
+    matiere4:matiere4
+    matiere3:matiere3
+    matiere2:matiere2
+    matiere1:matiere1
+    label:label
+    
+    canvas.before:
+        Color:
+            rgba:(0.7,0.7,0.7,0.7)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    RelativeLayout:
+        orientation: "vertical"
+        pos : self.pos
+        size: root.size
+
+        Image:
+            source: 'notes.png'
+            size_hint: 0.4, 0.4
+            pos_hint: {'center_x': 0.5, 'center_y': 0.85}
+
+        Label:
+            text:'Anglais'
+            font_size:"20"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.30, "center_y":.70}
+
+        Label:
+            id:matiere1
+            text:''
+            font_size:"30"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.70, "center_y":.70}
+
+        Label:
+            text:'Mathématiques'
+            font_size:"20"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.30, "center_y":.60}
+        
+        Label:
+            id:matiere2
+            text:''
+            font_size:"30"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.70, "center_y":.60}
+
+        Label:
+            text:'Informatique'
+            font_size:"20"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.30, "center_y":.50}
+
+        Label:
+            id:matiere3
+            text:''
+            font_size:"30"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.70, "center_y":.50}
+
+        Label:
+            text:'Réseaux'
+            font_size:"20"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.30, "center_y":.40}
+
+        Label:
+            id:matiere4
+            text:''
+            font_size:"30"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.70, "center_y":.40}
+
+        Label:
+            text:'Moyenne Générale'
+            font_size:"20"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.30, "center_y":.30}
+
+        Label:
+            id:label
+            text:''
+            font_size:"30"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.70, "center_y":.30}
+
+
+        Button:
+            text: "Voir les notes"
+            font_size:"20"
+            size_hint:0.50, 0.05
+            pos_hint:{"center_x":.5, "center_y":.20}
+            on_press:root.intero_mat()
+           
+
+        Button:
+            text: "Accueil"
+            font_size:"20"
+            size_hint:0.50, 0.05
+            pos_hint:{"center_x":.5, "center_y":.12}
+            on_release: 
+                app.root.current = "auth"
+                root.manager.transition.direction = "right"
+            #Cette partie ne marche pas mais elle corespond à la fin de mon programme python
+            # on_press:root.remove_bd()
+            
+
+
+        Button:
+            text: "Retour"
+            font_size:"20"
+            size_hint:0.50, 0.05
+            pos_hint:{"center_x":.5, "center_y":.04}
+            on_release: 
+                app.root.current = "interroger"
+                root.manager.transition.direction = "right"
+
+#Relié à la class Authentification du Python/Kivy dans la qu'elle l'utilisateur va chosir entre se connecter et s'incirer en cliquant sur des images qui redirige vers la 
+#page en question
+<Authentification>:
+    name: "auth"
+
+    canvas.before:
+        Color:
+            rgba:(1,1,1,1)
+        Rectangle:
+            pos: self.pos
+            size: self.size  
+
+    RelativeLayout:
+        oriental:"vertical"
+        pos : self.pos
+        size: root.size
+
+
+        Image:
+            source: 'iut.jpg'
+            size_hint: 1, 1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.80}
+
+
+        Button:
+            background_normal: 'login.png'
+            background_down: 'login.png'
+            size_hint:0.80,0.20
+            pos_hint:{"center_x":0.5, "center_y":.43}
+            on_release: 
+                app.root.current = "Connexion"
+                root.manager.transition.direction = "left"
+
+        Button:
+            background_normal: 'Inscription.png'
+            background_down: 'Inscription.png'
+            size_hint:0.80,0.20
+            pos_hint:{"center_x":0.5, "center_y":.27}
+            on_release: 
+                app.root.current = "first"
+                root.manager.transition.direction = "left"
+
+#Relié à la class Connexion du Python/Kivy est dans la qu'elle l'utilisateur entre son identifiant et son mdp et qui par la suite vérifira si l'identifiant et le mdp 
+#sont présent dans la bd si oui alors il affiche que l'identifiant et le mdp est correct sinon il affiche incorrect
+<Connexion>:
+    name: "Connexion"
+    idetu:idetu
+    mdp:mdp
+    affi:affi
+    button:button
+
+    canvas.before:
+        Color:
+            rgba:(0.7,0.7,0.7,0.7)
+        Rectangle:
+            pos: self.pos
+            size: self.size  
+
+    RelativeLayout:
+        oriental:"vertical"
+        pos : self.pos
+        size: root.size
+
+        Image:
+            source: 'iutrt2.png'
+            size_hint: 1, 1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.86}
+
+
+        Label:
+            text:"Identifiant"
+            font_size:"30"
+            size_hint:0.90, 0.5
+            pos_hint:{"center_x":.50, "center_y":.70}
+        
+        TextInput:
+            id:idetu
+            multiline:False
+            font_size:"20"
+            size_hint:0.90, 0.05
+            hint_text: "Enter votre identifiant"
+            pos_hint:{"center_x":.50, "center_y":.63}
+
+        Label:
+            text:"Mot de passe"
+            font_size:"30"
+            size_hint:0.90, 0.5
+            pos_hint:{"center_x":.50, "center_y":.53}
+        
+        TextInput:
+            id:mdp
+            multiline:False
+            font_size:"20"
+            size_hint:0.90, 0.05
+            pos_hint:{"center_x":.50, "center_y":.45}
+            hint_text: "Enter votre mot de passe"
+            password: True
+
+        Button:
+            id: button
+            size_hint: .2, .05
+            pos_hint: {"center_x": .5, "center_y": .40}
+            text:"Hide"
+            on_press: root.togglevisibility()
+
+
+        Label:
+            id:affi
+            text:''
+            font_size:"20"
+            size_hint:1, 0.1
+            pos_hint:{"center_x":.50, "center_y":.35}
+    
+    
+
+        Button:
+            text:"Vérifier"
+            font_size:"20"
+            size_hint:0.50, 0.05
+            pos_hint:{"center_x":.5, "center_y":.28}
+            on_press:root.login()
+            
+        Button:
+            text:"Connexion"
+            font_size:"20"
+            size_hint:0.50, 0.05
+            pos_hint:{"center_x":.5, "center_y":.20}
+            on_release: 
+                app.root.current = "interroger"
+                root.manager.transition.direction = "right"
+
+
+
+        Button:
+            text: "Retour"
+            font_size:"20"
+            size_hint:0.50, 0.05
+            pos_hint:{"center_x":.5, "center_y":.12}
+            on_release: 
+                app.root.current = "auth"
+                root.manager.transition.direction = "right"
+
+
+
